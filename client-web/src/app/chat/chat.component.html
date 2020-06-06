@@ -1,0 +1,11 @@
+<div *ngIf="messages$ | async as messages">
+	<div *ngFor="let msg of messages">
+		<div *ngIf="msg.type === 0">
+			<span>{{ msg.user.username }}</span>
+			<span>{{ msg.content }}</span>
+		</div>
+		<div *ngIf="msg.type === 1">{{ msg.content }}</div>
+	</div>
+</div>
+<input type="text" placeholder="请在此输入消息" [formControl]="messageText" (keyup.enter)="sendMessage()" />
+<button (click)="sendMessage()">发送</button>
