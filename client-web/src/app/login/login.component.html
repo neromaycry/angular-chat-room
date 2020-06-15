@@ -1,2 +1,11 @@
-<input type="text" placeholder="请输入昵称" [formControl]="username">
-<button (click)="login()">Login</button>
+<div class="login-container">
+    <div class="login-wrapper">
+        <div class="login-title">加入</div>
+
+        <input class="login-input" type="text" placeholder="请输入昵称" [formControl]="username" (keyup.enter)="login()">
+        <button class="login-button" (click)="login()">登录</button>
+    </div>
+    
+</div>
+
+

@@ -1,11 +1,26 @@
-<div *ngIf="messages$ | async as messages">
-	<div *ngFor="let msg of messages">
-		<div *ngIf="msg.type === 0">
-			<span>{{ msg.user.username }}</span>
-			<span>{{ msg.content }}</span>
-		</div>
-		<div *ngIf="msg.type === 1">{{ msg.content }}</div>
+<div class="chat-container">
+	<div class="chat-title">聊天室</div>
+	<div class="message-list-wrapper">
+		<ng-container *ngIf="messages$ | async as messages">
+			<ng-container *ngFor="let msg of messages">
+				<div *ngIf="msg.type === 0" class="message-user" [class.reverse]="msg.user.username === user.username">
+					<div class="message-content">{{ msg.content }}</div>
+					<div class="message-username">{{ msg.user.username }}</div>
+				</div>
+				<div *ngIf="msg.type === 1" class="message-system">
+					{{ msg.content }}
+				</div>
+			</ng-container>
+		</ng-container>
+	</div>
+	<div class="message-input-wrapper">
+		<input
+			class="message-input"
+			type="text"
+			placeholder="请在此输入消息"
+			[formControl]="messageText"
+			(keyup.enter)="sendMessage()"
+		/>
+		<button class="send-button" (click)="sendMessage()">发送</button>
 	</div>
 </div>
-<input type="text" placeholder="请在此输入消息" [formControl]="messageText" (keyup.enter)="sendMessage()" />
-<button (click)="sendMessage()">发送</button>

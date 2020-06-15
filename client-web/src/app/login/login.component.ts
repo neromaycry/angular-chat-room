@@ -25,9 +25,11 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-		this.chatSocketService.sendMessage('login', {
-			username: this.username.value,
-		});
+		if (this.username.value) {
+			this.chatSocketService.sendMessage('login', {
+				username: this.username.value,
+			});
+		}
 	}
 
 	ngOnInit(): void {
